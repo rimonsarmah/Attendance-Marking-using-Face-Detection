@@ -9,7 +9,7 @@ from datetime import date
 import matplotlib.pyplot as plt
 import numpy as np
 speak = pyttsx3.init()
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('attendance.db')
 cursor = conn.cursor()
 #cursor.execute('CREATE TABLE LOGIN_TABLE(u_id varchar(30), pass varchar(20), u_type varchar(20));')
 #cursor.execute('INSERT INTO LOGIN_TABLE VALUES("admin","abcd","admin");')
@@ -50,9 +50,37 @@ if user_type == 'admin':
                     Enter 2 : To View List of Students
                     Enter 3 : To Add New Student
                     Enter 4 : To Add New Faculty
-                    Enter 5 : To Change Password
-                    Enter 6 : To Logout
+                    Enter 5 : To Search Student
+                    Enter 6 : To Search Faculty
+                    Enter 7 : To Delete Student
+                    Enter 8 : To Delete Faculty
+                    Enter 9 : To Change Password
+                    Enter 10 : To Logout
                     """)
         speak.say("Choose an option please.")
         speak.runAndWait()
         choice = int(input('Enter your choice: '))
+elif user_type == 'faculty':
+    speak.say("Hello Faculty! Welcome to Attendance Marking System Using Face Detection. Hope you'll find it interesting.")
+    speak.runAndWait()
+    print("""
+
+
+        |======================================================| 
+        |==========Welcome To Attendance Marking System========|
+        |======================================================|
+         ------------------------------------------------------
+                             Welcome Faculty!
+
+                    Enter 1 : To View List of Students
+                    Enter 2 : To Search Student
+                    Enter 3 : To Mark Attendance
+                    Enter 4 : To View Attendance
+                    Enter 5 : To Visualize Attendance
+                    Enter 6 : To Change Password
+                    Enter 7 : To Logout
+                    """)
+    
+    speak.say("Choose an option please.")
+    speak.runAndWait()
+    choice = int(input('Enter your choice: '))
