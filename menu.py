@@ -57,4 +57,5 @@ def delete_member():
         
         choice_delete = int(input("Delete :\n1. Delete Student record\n2. Delete Faculty Record \n3. Back\n"))
     
-main()
+if __init__ == 'main':
+    main()
