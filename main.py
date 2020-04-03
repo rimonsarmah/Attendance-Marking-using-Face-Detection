@@ -14,7 +14,7 @@ cursor = conn.cursor()
 #cursor.execute('CREATE TABLE LOGIN_TABLE(u_id varchar(30), pass varchar(20), u_type varchar(20));')
 #cursor.execute('INSERT INTO LOGIN_TABLE VALUES("admin","abcd","admin");')
 #conn.commit()
-
+#functions
 speak.say("This is a system developed by Rimon, Shailesh, Vinay and Rick.")
 speak.runAndWait()
 login = -1
