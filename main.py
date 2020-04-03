@@ -103,6 +103,7 @@ if user_type == 'admin':
             print(x)
             dummy = input('Press any key to continue...........')
         elif choice == 4:
+            print('List of Students: ')
             x = PrettyTable()
             cursor.execute("SELECT * from STUDENT")
             x.field_names = ["ID", "Section", "Name", "Father's Name", "Mother's Name", "Email", "Phone No", "Parent's Phone", "Address"]
@@ -111,6 +112,7 @@ if user_type == 'admin':
             print(x)
             dummy = input('Press any key to continue...........')
         elif choice == 5:
+            print("Search Student")
             print("1)Search by ID")
             print("2)Search by Name:")
             choice = int(input('Enter 1 or 2......'))
@@ -184,24 +186,59 @@ if user_type == 'admin':
 elif user_type == 'faculty':
     speak.say("Hello Faculty! Welcome to Attendance Marking System Using Face Detection. Hope you'll find it interesting.")
     speak.runAndWait()
-    print("""
+    while login == 1:
+        print("""
 
 
-        |======================================================| 
-        |==========Welcome To Attendance Marking System========|
-        |======================================================|
-         ------------------------------------------------------
-                             Welcome Faculty!
+            |======================================================| 
+            |==========Welcome To Attendance Marking System========|
+            |======================================================|
+             ------------------------------------------------------
+                                 Welcome Faculty!
 
-                    Enter 1 : To View List of Students
-                    Enter 2 : To Search Student
-                    Enter 3 : To Mark Attendance
-                    Enter 4 : To View Attendance
-                    Enter 5 : To Visualize Attendance
-                    Enter 6 : To Change Password
-                    Enter 7 : To Logout
-                    """)
-    
-    speak.say("Choose an option please.")
-    speak.runAndWait()
-    choice = int(input('Enter your choice: '))
+                        Enter 1 : To View List of Students
+                        Enter 2 : To Search Student
+                        Enter 3 : To Mark Attendance
+                        Enter 4 : To View Attendance
+                        Enter 5 : To Visualize Attendance
+                        Enter 6 : To Change Password
+                        Enter 7 : To Logout
+                        """)
+        
+        speak.say("Choose an option please.")
+        speak.runAndWait()
+        choice = int(input('Enter your choice: '))
+        if choice == 1:
+            section = input('Enter the section: ')
+            print('List of Students: ')
+            x = PrettyTable()
+            cursor.execute("SELECT * from STUDENT where s_section = ?",(section,))
+            x.field_names = ["ID", "Section", "Name", "Father's Name", "Mother's Name", "Email", "Phone No", "Parent's Phone", "Address"]
+            for row in cursor:
+                x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]]);
+            print(x)
+            dummy = input('Press any key to continue...........')
+        elif choice == 2:
+            print("Search Student")
+            print("1)Search by ID")
+            print("2)Search by Name:")
+            choice = int(input('Enter 1 or 2......'))
+            if choice == 1:
+                key = input('Enter ID: ')
+                x = PrettyTable()
+                cursor.execute("SELECT * from STUDENT_DATA WHERE s_id = ?;", key)
+                x.field_names = ["ID", "Section", "Name", "Father's Name", "Mother's Name", "Email", "Phone No", "Parent's Phone", "Address"]
+                for row in cursor:
+                    x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]]);
+                print(x)
+                dummy = input('Press any key to continue...........')
+            if choice == 2:
+                key = input('Enter Name: ')
+                key = key+'%'
+                x = PrettyTable()
+                cursor.execute("SELECT * from STUDENT_DATA WHERE s_name LIKE ?;", (key,))
+                x.field_names = ["ID", "Section", "Name", "Father's Name", "Mother's Name", "Email", "Phone No", "Parent's Phone", "Address"]
+                for row in cursor:
+                    x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]]);
+                print(x)
+                dummy = input('Press any key to continue...........')
