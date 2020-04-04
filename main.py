@@ -8,6 +8,7 @@ from prettytable import PrettyTable
 from datetime import date
 import matplotlib.pyplot as plt
 import numpy as np
+import attendance as atd
 speak = pyttsx3.init()
 conn = sqlite3.connect('attendance.db')
 cursor = conn.cursor()
@@ -237,6 +238,10 @@ elif user_type == 'faculty':
     speak.say("Hello Faculty! Welcome to Attendance Marking System Using Face Detection. Hope you'll find it interesting.")
     speak.runAndWait()
     while login == 1:
+        cursor.execute("SELECT * from FACULTY_DATA where f_email=?;",(username,))
+        for row in cursor:
+            fac_name = row[1]
+
         print("""
 
 
@@ -302,3 +307,38 @@ elif user_type == 'faculty':
                 speak.say("Press any key to continue.")
                 speak.runAndWait()
                 dummy = input('Press any key to continue...........')
+        elif choice == 3:
+            section = input('Enter Section: ')
+            today = input('Enter date in DD-MM-YYYY format: ')
+            slot = input('Enter time slot: ')
+            fac_subject = input('Enter subject')
+            atd.attend()
+            s_present = atd.name_list
+            print('Name of present Students: ',s_present)
+            #cursor.execute("CREATE TABLE attendance(section varchar(10),s_name varchar(20),date varchar(20), time varchar(20), subject varchar(20), marked_by varchar(40), remark varchar(20));")
+            cursor.execute("SELECT * from STUDENT where s_section=?;",(section,))
+            s_all = []
+            for row in cursor:
+                s_all.append(row[2])
+            print('Name of all students: ', s_all)
+            for i in range(len(s_all)):
+                if s_all[i] in s_present:
+                    rem = 'Present'
+                    cursor.execute("INSERT INTO attendance VALUES(?,?,?,?,?,?,?);",(section,s_all[i],today,slot,fac_subject,fac_name,rem))
+                    conn.commit()
+                else:
+                    rem = 'Absent'
+                    cursor.execute("INSERT INTO attendance VALUES(?,?,?,?,?,?,?);",(section,s_all[i],today,slot,fac_subject,fac_name,rem))
+                    conn.commit()
+            dummy = input('Press any key to continue...........')
+        elif choice == 4:
+            cursor.execute("SELECT * FROM attendance;")
+            x = PrettyTable()
+            x.field_names = ["Section", "Student Name", "Date", "Time", "Subject", "Marked by", "Remark"]
+            for row in cursor:
+                x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6]]);
+            print(x)
+            speak.say("Press any key to continue.")
+            speak.runAndWait()
+            dummy = input('Press any key to continue...........')
+            
