@@ -19,12 +19,12 @@ speak.say("This is a system developed by Rimon, Shailesh, Vinay and Rick.")
 speak.runAndWait()
 login = -1
 while login!=1:
-    username = input('Enter username: ')
     speak.say("Enter your username.")
     speak.runAndWait()
-    print('Enter password: ')
+    username = input('Enter username: ')
     speak.say("Enter your password.")
     speak.runAndWait()
+    print('Enter password: ')
     password = getpass.getpass()
     cursor.execute('SELECT * FROM LOGIN_TABLE WHERE u_id=?;',(username,))
     for x in cursor:
@@ -62,7 +62,7 @@ if user_type == 'admin':
                     Enter 9 : To Change Password
                     Enter 10 : To Logout
                     """)
-        speak.say("Choose one from the following option.")
+        speak.say("Choose one from the given option.")
         speak.runAndWait()
         choice = int(input('Enter your choice: '))
         if choice == 1:
@@ -82,9 +82,10 @@ if user_type == 'admin':
             print('Data Successfully Entered')
             speak.say("Data for new student is sucessfully added.")
             speak.runAndWait()
-            dummy = input('Press any key to continue...........')
             speak.say("Press any key to continue.")
             speak.runAndWait()
+            dummy = input('Press any key to continue...........')
+           
         elif choice == 2:
             print('Add New Faculty')
             f_name = input('Enter Faculty name: ')
@@ -102,9 +103,10 @@ if user_type == 'admin':
             print('Data Successfully Entered')
             speak.say("Data of new faculty is added sucessfully.")
             speak.runAndWait()
-            dummy = input('Press any key to continue...........')
             speak.say("Press any key to continue.")
             speak.runAndWait()
+            dummy = input('Press any key to continue...........')
+            
         elif choice == 3:
             print('List of Faculties: ')
             x = PrettyTable()
@@ -113,9 +115,10 @@ if user_type == 'admin':
             for row in cursor:
                 x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6]]);
             print(x)
-            dummy = input('Press any key to continue...........')
             speak.say("Press any key to continue.")
             speak.runAndWait()
+            dummy = input('Press any key to continue...........')
+            
         elif choice == 4:
             print('List of Students: ')
             x = PrettyTable()
@@ -124,9 +127,10 @@ if user_type == 'admin':
             for row in cursor:
                 x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]]);
             print(x)
-            dummy = input('Press any key to continue...........')
             speak.say("Press any key to continue.")
             speak.runAndWait()
+            dummy = input('Press any key to continue...........')
+           
         elif choice == 5:
             print("Search Student")
             print("1)Search by ID")
@@ -154,9 +158,10 @@ if user_type == 'admin':
                 for row in cursor:
                     x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]]);
                 print(x)
-                dummy = input('Press any key to continue...........')
                 speak.say("Press any key to continue.")
                 speak.runAndWait()
+                dummy = input('Press any key to continue...........')
+                
         elif choice == 6:
             print("Search Faculty")
             key = input('Enter Name: ')
@@ -177,9 +182,10 @@ if user_type == 'admin':
             print('Success')
             speak.say("Student data is successfully deleted.")
             speak.runAndWait()
-            dummy = input('Press any key to continue...........')
             speak.say("Press any key to continue.")
             speak.runAndWait()
+            dummy = input('Press any key to continue...........')
+            
         elif choice == 8:
             print('Delete Faculty: ')
             key = input('Enter email ID: ')
@@ -191,9 +197,10 @@ if user_type == 'admin':
             conn.commit()
             speak.say("Faculty data is successfully deleted.")
             speak.runAndWait()
-            dummy = input('Press any key to continue...........')
             speak.say("Press any key to continuue.")
             speak.runAndWait()
+            dummy = input('Press any key to continue...........')
+           
         elif choice == 9:
             success = -1
             while success!=1:
@@ -221,9 +228,10 @@ if user_type == 'admin':
                         speak.runAndWait()
         elif choice == 10:
             login = 0
-            print('You are successfully logged out')
             speak.say("You are successfully logged out.")
             speak.runAndWait()
+            print('You are successfully logged out')
+            
         
 elif user_type == 'faculty':
     speak.say("Hello Faculty! Welcome to Attendance Marking System Using Face Detection. Hope you'll find it interesting.")
@@ -259,15 +267,14 @@ elif user_type == 'faculty':
             for row in cursor:
                 x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]]);
             print(x)
-            dummy = input('Press any key to continue...........')
             speak.say("Press any key to continue.")
             speak.runAndWait()
+            dummy = input('Press any key to continue...........')
+           
         elif choice == 2:
             print("Search Student")
             print("1)Search by ID")
             print("2)Search by Name:")
-            speak.say("Search student either by ID or by name.")
-            speak.runAndWait()
             choice = int(input('Enter 1 or 2......'))
             if choice == 1:
                 key = input('Enter ID: ')
@@ -291,6 +298,7 @@ elif user_type == 'faculty':
                 for row in cursor:
                     x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]]);
                 print(x)
-                dummy = input('Press any key to continue...........')
+                
                 speak.say("Press any key to continue.")
                 speak.runAndWait()
+                dummy = input('Press any key to continue...........')
