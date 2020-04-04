@@ -192,7 +192,7 @@ if user_type == 'admin':
             speak.say("Faculty data is successfully deleted.")
             speak.runAndWait()
             dummy = input('Press any key to continue...........')
-            speak.say("Press any key to continue.")
+            speak.say("Press any key to continuue.")
             speak.runAndWait()
         elif choice == 9:
             success = -1
