@@ -1,5 +1,5 @@
 def main():
-    print("Welcome to the UMS choose Following to proceed : ")
+    print("Welcome to the UMS choose Following to proceed: ")
     choice= int(input("Choose your authority:\t\n1. Admin\n2. Faculty\n3. Exit\n"))
     while choice != 3:
         if choice == 1:          
