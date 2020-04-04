@@ -58,7 +58,7 @@ if user_type == 'admin':
                     Enter 9 : To Change Password
                     Enter 10 : To Logout
                     """)
-        speak.say("Choose an option please.")
+        speak.say("Choose one from following option.")
         speak.runAndWait()
         choice = int(input('Enter your choice: '))
         if choice == 1:
