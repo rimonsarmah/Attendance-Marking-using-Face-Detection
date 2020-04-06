@@ -341,4 +341,77 @@ elif user_type == 'faculty':
             speak.say("Press any key to continue.")
             speak.runAndWait()
             dummy = input('Press any key to continue...........')
-            
+        elif choice == 5:
+            print('Visualize Attendance')
+            print('1)Attendance of a particular student.')
+            print('2)Attendance of a particular section.')
+            choice = int(input('Enter your choice..'))
+            if choice == 1:
+                print('Enter details:')
+                countp = 0
+                total = 0
+                vis_student_name = input('Enter student name: ')
+                vis_student_sec = input('Enter student section: ')
+                cursor.execute("SELECT * FROM attendance where s_name = ? AND section = ?;",(vis_student_name,vis_student_sec))
+                for row in cursor:
+                    if row[6] == 'Present':
+                        countp += 1
+                    total +=1
+                absent = total - countp
+                att_perc = (countp/total)*100
+                print('Attendance percentage : ' + str(att_perc))
+                labels = ['Present','Absent']
+                vals = [countp,absent]
+                colors = ['green','red']
+                patches, texts = plt.pie(vals, colors=colors, shadow=True, startangle=90)
+                plt.legend(patches, labels, loc="best")
+                plt.axis('equal')
+                plt.tight_layout()
+                plt.show()
+                speak.say("Press any key to continue.")
+                speak.runAndWait()
+                dummy = input('Press any key to continue...........')
+            elif choice == 2:
+                countp = 0
+                total = 0
+                print('Enter details:')
+                vis_student_sec = input('Enter section: ')
+                cursor.execute("SELECT * FROM attendance where section = ?;",(vis_student_sec,))
+                for row in cursor:
+                    if row[6] == 'Present':
+                        countp += 1
+                    total +=1
+                absent = total - countp
+                att_perc = (countp/total)*100
+                print('Attendance percentage : ' + str(att_perc))
+                labels = ['Present','Absent']
+                vals = [countp,absent]
+                colors = ['green','red']
+                patches, texts = plt.pie(vals, colors=colors, shadow=True, startangle=90)
+                plt.legend(patches, labels, loc="best")
+                plt.axis('equal')
+                plt.tight_layout()
+                plt.show()
+                speak.say("Press any key to continue.")
+                speak.runAndWait()
+        elif choice == 6:
+            success = -1
+            while success!=1:
+                print('Enter password: ')
+                password = getpass.getpass()
+                cursor.execute('SELECT * FROM LOGIN_TABLE WHERE u_id=?;',(username,))
+                for x in cursor:
+                    pass_val = x[1]
+                    if pass_val == password:
+                        newp = input('Please enter new password: ')
+                        cursor.execute("UPDATE LOGIN_TABLE set pass=? where u_id=?;",(newp,username))
+                        conn.commit()
+                        cursor.execute("UPDATE FACULTY_DATA set f_pass=? where f_email=?;",(newp,username))
+                        conn.commit()
+                        success = 1
+                        login = 0
+                    else:
+                        print("I'm afraid! You have entered a wrong password. Please try again.")
+        elif choice == 7:
+            login = 0
+            print('You are successfully logged out')
