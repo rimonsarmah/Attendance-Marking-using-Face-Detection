@@ -313,7 +313,7 @@ elif user_type == 'faculty':
             slot = input('Enter time slot: ')
             fac_subject = input('Enter subject')
             atd.attend()
-            s_present = atd.name_list
+            s_present = atd.names
             print('Name of present Students: ',s_present)
             #cursor.execute("CREATE TABLE attendance(section varchar(10),s_name varchar(20),date varchar(20), time varchar(20), subject varchar(20), marked_by varchar(40), remark varchar(20));")
             cursor.execute("SELECT * from STUDENT where s_section=?;",(section,))
