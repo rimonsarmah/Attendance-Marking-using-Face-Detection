@@ -286,7 +286,7 @@ elif user_type == 'faculty':
                 speak.say("Enter identification.")
                 speak.runAndWait()
                 x = PrettyTable()
-                cursor.execute("SELECT * from STUDENT_DATA WHERE s_id = ?;", key)
+                cursor.execute("SELECT * from STUDENT WHERE s_id = ?;", key)
                 x.field_names = ["ID", "Section", "Name", "Father's Name", "Mother's Name", "Email", "Phone No", "Parent's Phone", "Address"]
                 for row in cursor:
                     x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]]);
@@ -298,7 +298,7 @@ elif user_type == 'faculty':
                 key = input('Enter Name: ')
                 key = key+'%'
                 x = PrettyTable()
-                cursor.execute("SELECT * from STUDENT_DATA WHERE s_name LIKE ?;", (key,))
+                cursor.execute("SELECT * from STUDENT WHERE s_name LIKE ?;", (key,))
                 x.field_names = ["ID", "Section", "Name", "Father's Name", "Mother's Name", "Email", "Phone No", "Parent's Phone", "Address"]
                 for row in cursor:
                     x.add_row([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]]);
