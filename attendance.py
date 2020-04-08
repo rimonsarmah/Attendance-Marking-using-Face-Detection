@@ -28,9 +28,9 @@ def attend():
     ]
     known_face_names = [
         "Rimon Sarmah",
-        "Vinay",
-        "Shailesh",
-        "Rick",
+        "Vinay Sharma",
+        "Shailesh Gahlawat",
+        "Rick Dhillon",
     ]
     face_locations = []
     face_encodings = []
